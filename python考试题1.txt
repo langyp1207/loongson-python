@@ -1,0 +1,93 @@
+#抓取网页中的电话号码
+
+import requests
+from bs4 import BeautifulSoup
+
+url ="https://www.loongson.cn/application/list?id=33
+
+resp = requests .get(url)
+
+soup = BeautifulSoup(resp.text,'ixml')
+ss = soup.select("p > span")
+for i in ss:
+	if'电话 ( Tel):' in i.text:
+	phone = i.text.split('电话 ( Tel ) :')[1].strip()
+	if len(phone.split("")) == 3:
+		al,a2,a3 = phone.split("")
+		print(al+"."+a2+a3)
+	if len(phone.split("")) == 2:
+		al,a2 = phone.split("")
+		print(al+"."+a2)
+
+
+#抓取龙芯芯片型号
+
+import requests
+import re
+url ="https://www.loongson .cn!resp = requests .get(url)print(resp.status code)
+ret = re.findall('<li class="longxintem">,*?<a,*?product.*?>(.*?)</a>,*?<)li>', resp.text,re.slre.I)
+for i in ret:
+          print(i)
+
+#抓取一些文件公告
+
+from selenium import webdriver
+from selenium.webdriver.common .by import By
+
+br= webdriver.Chrome('browserdriver')
+br.get("https ://www.loongson .cn")
+
+imgs = br.find elements (By.TAG NAME,"img"
+for i in imgs:
+           src = i.get attribute( 'src')
+           if src[:4] == 'http':
+	     print(src)
+
+#####################################
+from selenium import webdriver
+from selenium.webdriver.common .by import By
+import time
+url="http://w.sse.com,cn/assortment/stock/list/info/announcement/index.shtml?oroductId=%s"
+br = webdriver.Chrome('ibrowserdriver')
+br.get( url %"687047")
+
+time.sleep(5)
+
+table = br.find element(By.CLASS NAME,'search ')
+trs = table.text.split('\n' )
+for i in trs:
+          print(i.split(""))
+
+#############################################
+
+from selenium import webdriver
+from selenium.webdriver.common .by import By
+import time
+
+url="http://www.sse.com.cn/assortment/stock/list/info/announcement/index. shtml?productId=%s"
+
+br = webdriver.Chrome( lbrowserdriver')
+br.get( url %"688047")
+
+time.sleep(5)
+
+table list = []
+
+path1 ="/html/body/div[8]/div[2]/div[2]/div[2]/div/div/div/div[3]/div/div[1]/div[2]/div[2]/div/table"
+
+table = brfind element(By.XPATH,pathl)trs =table.text.split(" n')
+for i in trs:
+          print(i.split(""))
+          table list.append(i.split(""))
+
+#存到表格
+
+from openpyxl import Workbook
+wb=Workbook()
+ws = wb.active
+for i in range(0,len(table list)):
+     ws["A"+str(i+1)] = table list[i][0]
+     ws["B"+str(i+1)]= table list[il][1]
+     ws["C"+str(i+1)]= table list[i][2]
+     ws["D"+str(i+1)] = table list[i][3]
+wb .save( "example 9 .xlsx" )
